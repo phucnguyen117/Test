@@ -5,6 +5,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from
 import { FcGoogle } from "react-icons/fc";
 
 export default function Login() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const [user, setUser] = useState(null);
 
   // Theo dõi trạng thái đăng nhập (vẫn giữ khi chuyển trang)
@@ -22,7 +23,7 @@ export default function Login() {
         };
 
         try {
-          await fetch("http://localhost:5000/api/users", {
+          await fetch(`${API_URL}/api/users`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(userData),

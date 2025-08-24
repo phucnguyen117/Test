@@ -13,6 +13,7 @@ export default function GuessNumberGame() {
     const [leaderboard, setLeaderboard] = useState([]);
     const [gameOver, setGameOver] = useState(false);
     const [userScore, setUserScore] = useState(0);
+    const API_URL = import.meta.env.VITE_API_URL;
 
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export default function GuessNumberGame() {
     useEffect(() => {
         if (!user) return;
 
-        fetch(`http://localhost:5000/api/user/${user.uid}`)
+        fetch(`${API_URL}/api/user/${user.uid}`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
@@ -40,7 +41,7 @@ export default function GuessNumberGame() {
 
     // 🔥 fetch leaderboard khi load trang
     useEffect(() => {
-        fetch("http://localhost:5000/api/leaderboard")
+        fetch(`${API_URL}/api/leaderboard`)
             .then((res) => res.json())
             .then((data) => setLeaderboard(data))
             .catch((err) => console.error(err));
@@ -49,13 +50,13 @@ export default function GuessNumberGame() {
     // 🔥 cập nhật điểm khi thắng
     const updateScore = async (newScore) => {
         if (!user) return;
-        await fetch("http://localhost:5000/api/update-score", {
+        await fetch(`${API_URL}/api/update-score`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: user.uid, score: newScore }),
         });
         // load lại leaderboard
-        const res = await fetch("http://localhost:5000/api/leaderboard");
+        const res = await fetch(`${API_URL}/api/leaderboard`);
         setLeaderboard(await res.json());
     };
 
