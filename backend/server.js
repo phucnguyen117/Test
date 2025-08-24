@@ -16,6 +16,8 @@ mongoose
   .then(() => console.log("✅ MongoDB thành công"))
   .catch((err) => console.error("❌ MongoDB thất bại:", err));
 
+  app.get('/', (req, res) => res.send("API Working"))
+
 // API lưu user
 app.post("/api/users", async (req, res) => {
   try {
@@ -90,5 +92,5 @@ app.get("/api/leaderboard", async (req, res) => {
 });
 
 
-// ✅ Export handler cho Vercel
-export default app;
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server chạy ở http://localhost:${PORT}`));
