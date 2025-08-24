@@ -90,5 +90,5 @@ app.get("/api/leaderboard", async (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server chạy ở http://localhost:${PORT}`));
+// ✅ Export handler cho Vercel
+export default app;
