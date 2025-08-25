@@ -92,10 +92,5 @@ app.get("/api/leaderboard", async (req, res) => {
 });
 
 
-const PORT = process.env.PORT || 5000
-
-Sentry.setupExpressErrorHandler(app);
-
-app.listen(PORT, () => {
-    console.log(`Server đang chạy ở cổng ${PORT}`);
-})
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server chạy ở http://localhost:${PORT}`));
