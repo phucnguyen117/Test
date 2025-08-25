@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Snowfall from "react-snowfall";
 import Login from "./components/Login";
 import Game from "./pages/GamePage";
+import Donate from "./pages/Donate";
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/game" element={<Game />} />
+          <Route path="/donate" element={<Donate />} />
         </Routes>
         
         <Footer />

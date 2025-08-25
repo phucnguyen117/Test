@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 export default function About() {
   const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -24,11 +26,15 @@ export default function About() {
       <div className="bg-gray-100 rounded-2xl shadow-lg flex flex-col md:flex-row max-w-4xl w-full overflow-hidden">
         {/* Ảnh đại diện */}
         <div className="md:w-1/2 flex items-center justify-center bg-indigo-100 p-6">
+        
+          {loading && <p className="text-gray-600 text-lg">Đang tải...</p>}
           <img
             src="https://i.pinimg.com/736x/15/e5/da/15e5da640fe35d6122350347f146d588.jpg"
-            alt="Ảnh đại diện"
+            alt="Ảnh"
             className="rounded-xl shadow-md"
+            onLoad={() => setLoading(false)}
           />
+          
         </div>
 
         {/* Thông tin */}
@@ -53,6 +59,16 @@ export default function About() {
                   <p className="text-xl font-bold text-indigo-700 mt-2">
                     {Math.round(weather.main.temp)}°C
                   </p>
+                  {/* Icon/Emoji kiểu thời tiết */}
+                  <div className="text-4xl">
+                    {weather.weather[0].main === "Clear" && "🌤"}       {/* Nắng */}
+                    {weather.weather[0].main === "Clouds" && "☁️"}      {/* Nhiều mây */}
+                    {weather.weather[0].main === "Rain" && "🌧"}        {/* Mưa */}
+                    {weather.weather[0].main === "Thunderstorm" && "🌩"}{/* Giông */}
+                    {weather.weather[0].main === "Snow" && "❄️"}        {/* Tuyết */}
+                    {weather.weather[0].main === "Drizzle" && "💧"}     {/* Mưa phùn */}
+                    {weather.weather[0].main === "Mist" && "🌫"}        {/* Sương mù */}
+                  </div>
                   <p>💧 Độ ẩm: <span className="font-semibold">{weather.main.humidity}%</span></p>
                   <p>💨 Gió: <span className="font-semibold">{weather.wind.speed} m/s</span></p>
                 </div>

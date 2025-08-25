@@ -65,6 +65,7 @@ const Navbar = ({ showSnow, setShowSnow }) => {
         <ul className="flex flex-col mt-4 space-y-3 text-white items-center">
           <li><Link to="/" className="hover:text-gray-700">Trang Chủ</Link></li>
           <li><Link to="/about" className="hover:text-gray-700">Giới Thiệu</Link></li>
+          <li><Link to="/donate" className="hover:text-gray-700">Ủng Hộ</Link></li>
           <li><Link to="/game" className="hover:text-gray-700">Trò Chơi</Link></li>
           <li className="flex items-center gap-3">
             <span className="text-sm ">❄️Tuyết</span>
