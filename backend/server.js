@@ -10,13 +10,40 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Kết nối MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB thành công"))
-  .catch((err) => console.error("❌ MongoDB thất bại:", err));
+// --- Mongoose connection cache để serverless ---
+let cached = global.mongoose;
+if (!cached) cached = global.mongoose = { conn: null, promise: null };
 
-  app.get('/', (req, res) => res.send("API Working"))
+async function connectDB(uri) {
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(uri)
+      .then((mongoose) => {
+        console.log("✅ MongoDB kết nối thành công");
+        return mongoose;
+      }).catch((err) => {
+        console.error("❌ MongoDB kết nối thất bại:", err);
+        throw err;
+      });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
+
+// --- Middleware kết nối trước mỗi request ---
+app.use(async (req, res, next) => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    next();
+  } catch (err) {
+    res.status(500).json({ success: false, error: "Lỗi kết nối DB" });
+  }
+});
+
+// --- Routes ---
+app.get('/', (req, res) => res.send("API Working"))
 
 // API lưu user
 app.post("/api/users", async (req, res) => {
