@@ -23,7 +23,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-blue-300 flex flex-col items-center justify-center">
 
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-white mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-white mb-6">
           Chào bạn, Đây là Minecraft PE 1.21.100 - 🎉
         </h1>
 

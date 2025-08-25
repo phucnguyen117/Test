@@ -49,11 +49,11 @@ export default function About() {
           </div>
 
           {/* Thời tiết */}
-          <div className="mt-6 bg-indigo-100 p-4 rounded-xl shadow-inner flex flex-col items-center">
+          <div className="mt-6 bg-indigo-50 p-4 rounded-xl shadow-inner flex flex-col items-center">
             {weather ? (
               <>
                 <h3 className="text-lg font-semibold text-indigo-600">
-                  🌤 Thời tiết hiện tại của {weather.name}
+                  🌤 Thời tiết hiện tại {weather.name}
                 </h3>
                 <div className="flex flex-col items-center">
                   <p className="text-xl font-bold text-indigo-700 mt-2">

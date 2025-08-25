@@ -169,7 +169,7 @@ export default function GuessNumberGame() {
                             maxLength="1"
                             value={val}
                             onChange={(e) => handleChange(i, e.target.value)}
-                            className={`w-14 h-14 text-center text-xl font-bold rounded-lg border-4 focus:outline-none 
+                            className={`w-12 h-12 sm:w-16 sm:h-16 text-center text-xl font-bold rounded-lg border-4 focus:outline-none 
                 ${results[i] === true
                                     ? "border-green-500"
                                     : results[i] === false
