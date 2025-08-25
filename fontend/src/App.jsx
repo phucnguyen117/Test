@@ -1,14 +1,15 @@
 // src/App.jsx
-import React , { useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Snowfall from "react-snowfall";
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import Game from "./pages/GamePage";
 import Donate from "./pages/Donate";
+import MusicPlayer from "./components/MusicPlayer";
 
 
 export default function App() {
@@ -27,8 +28,11 @@ export default function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/donate" element={<Donate />} />
         </Routes>
-        
+
         <Footer />
+
+        <MusicPlayer />
+
       </div>
 
     </Router>
