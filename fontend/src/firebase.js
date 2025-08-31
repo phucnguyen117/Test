@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth"; // thêm cái này để login
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCPW51ixMupwcrNE6nV1wP0R-JLAOyDKtw",
-  authDomain: "web-phucnguyen.firebaseapp.com",
-  projectId: "web-phucnguyen",
-  storageBucket: "web-phucnguyen.appspot.com",
-  messagingSenderId: "826643692003",
-  appId: "1:826643692003:web:bf2660c517deac8ead08d6",
-  measurementId: "G-CHJHGS58X7"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

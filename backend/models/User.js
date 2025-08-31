@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  id: { type: String, required: true, unique: true }, // UID từ Firebase
   name: String,
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   avatar: String,
   role: { type: String, default: "user" }, // mặc định "user"
   score: { type: Number, default: 0 },
