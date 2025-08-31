@@ -1,46 +1,17 @@
 // server/index.js
 import express from "express";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import User from "./models/User.js";
+import connectDB from './config/db.js'
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// --- Mongoose connection cache để serverless ---
-let cached = global.mongoose;
-if (!cached) cached = global.mongoose = { conn: null, promise: null };
-
-async function connectDB(uri) {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(uri)
-      .then((mongoose) => {
-        console.log("✅ MongoDB kết nối thành công");
-        return mongoose;
-      }).catch((err) => {
-        console.error("❌ MongoDB kết nối thất bại:", err);
-        throw err;
-      });
-  }
-
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
-
-// --- Middleware kết nối trước mỗi request ---
-app.use(async (req, res, next) => {
-  try {
-    await connectDB(process.env.MONGO_URI);
-    next();
-  } catch (err) {
-    res.status(500).json({ success: false, error: "Lỗi kết nối DB" });
-  }
-});
+// ket no mongodb
+await connectDB();
 
 // --- Routes ---
 app.get('/', (req, res) => res.send("API Working"))
@@ -118,6 +89,9 @@ app.get("/api/leaderboard", async (req, res) => {
   }
 });
 
+//Port 
+const PORT = process.env.PORT || 5000
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server chạy ở http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server đang chạy ở cổng ${PORT}`);
+})
