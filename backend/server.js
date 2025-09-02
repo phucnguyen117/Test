@@ -21,6 +21,12 @@ app.post("/api/users", async (req, res) => {
   try {
     const { id, name, email, avatar, role } = req.body;
 
+    // ✅ Verify Firebase ID Token
+    const decoded = await admin.auth().verifyIdToken(token);
+    if (decoded.uid !== id) {
+      return res.status(401).json({ success: false, error: "Token không hợp lệ" });
+    }
+
     let user = await User.findOne({ id });
     if (user) {
       // update
